@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — KALPITIYA SCIENCE PROJECT</title>
+<link rel="icon" href="FB_IMG_1787978504811.jpg">
+<style>
+  :root{
+    --teal-deep:#010447;
+    --teal-ink:#010228;
+    --gold:#06f2f2;
+    --gold-light:#ffff08;
+    --sand:#eff8fa;
+    --olive:#00d9ff;
+    --ink:#1f0e9f;
+    --white:#feffff;
+    --radius:10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Karla', sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 15% 20%, rgba(201,162,39,0.18), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(201,162,39,0.12), transparent 45%),
+      linear-gradient(160deg, var(--teal-deep) 0%, var(--teal-ink) 100%);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  h1,h2,h3{ font-family:'Amiri', serif; }
+  .star{
+    display:inline-block;
+    width:1em; height:1em;
+    background:currentColor;
+    clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  }
+  .card{
+    background:var(--white);
+    border-radius:var(--radius);
+    border-top:4px solid var(--gold);
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    max-width:520px;
+    width:100%;
+    padding:48px 40px;
+    text-align:center;
+  }
+  .card .star{ color:var(--gold); width:32px; height:32px; margin-bottom:18px; }
+  .card h1{ color:var(--teal-deep); font-size:1.8rem; margin-bottom:14px; }
+  .card p{ color:#4a4a3f; font-size:1.02rem; margin-bottom:8px; }
+  .details{
+    text-align:left;
+    background:var(--sand);
+    border-radius:8px;
+    padding:18px 20px;
+    margin:22px 0;
+    font-size:.92rem;
+    color:#3a3a30;
+    display:none;
+  }
+  .details.show{ display:block; }
+  .details p{ margin-bottom:6px; }
+  .details strong{ color:var(--teal-deep); }
+  .btn{
+    display:inline-block;
+    margin-top:12px;
+    padding:13px 28px;
+    border-radius:var(--radius);
+    font-weight:700;
+    font-size:.95rem;
+    background:var(--teal-deep);
+    color:var(--white);
+    text-decoration:none;
+    transition:background .2s ease, transform .15s ease;
+  }
+  .btn:hover{ background:var(--teal-ink); transform:translateY(-2px); }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <span class="star" aria-hidden="true"></span>
+    <h1 id="greeting">Thank You!</h1>
+    <p>Your message has been received. Our admissions team will get back to you shortly.</p>
+
+    <div class="details" id="detailsBox">
+      <p><strong>Name:</strong> <span id="dName"></span></p>
+      <p><strong>Email:</strong> <span id="dEmail"></span></p>
+      <p><strong>Contact Number:</strong> <span id="dPhone"></span></p>
+      <p><strong>Stream:</strong> <span id="dStream"></span></p>
+    </div>
+
+    <a href="ksp new.html" class="btn">Back to Home</a>
+  </div>
+
+<script>
+  // Read the details that were saved on the contact page and show a personalized greeting.
+  const raw = sessionStorage.getItem('kspContactDetails');
+  if (raw) {
+    try {
+      const d = JSON.parse(raw);
+      if (d.name) {
+        document.getElementById('greeting').textContent = 'Thank You, ' + d.name + '!';
+      }
+      document.getElementById('dName').textContent = d.name || '-';
+      document.getElementById('dEmail').textContent = d.email || '-';
+      document.getElementById('dPhone').textContent = d.contactNumber || '-';
+      document.getElementById('dStream').textContent = d.stream || '-';
+      document.getElementById('detailsBox').classList.add('show');
+    } catch (e) {
+      // ignore malformed/missing data
+    }
+  }
+</script>
+
+</body>
+</html>

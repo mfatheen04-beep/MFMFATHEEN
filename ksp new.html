@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KALPITIYA SCIENCE PROJECT</title>
+<link rel="icon" href="FB_IMG_1787978504811.jpg">
+<style>
+  :root{
+    --teal-deep:#010447;
+    --teal-ink:#010228;
+    --gold:#06f2f2;
+    --gold-light:#ffff08;
+    --sand:#eff8fa;
+    --olive:#00d9ff;
+    --ink:#1f0e9f;
+    --white:#feffff;
+    --radius:10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Karla', sans-serif;
+    color:var(--ink);
+    background:var(--sand);
+    line-height:1.6;
+  }
+  h1,h2,h3,.brand{
+    font-family:'Amiri', serif;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .container{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  /* ---------- Star motif (signature element) ---------- */
+  .star{
+    display:inline-block;
+    width:1em; height:1em;
+    background:currentColor;
+    clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  }
+  .star-divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:0 auto 40px;
+    color:var(--gold);
+  }
+  .star-divider::before, .star-divider::after{
+    content:"";
+    height:1px;
+    width:64px;
+    background:linear-gradient(90deg, transparent, var(--gold));
+  }
+  .star-divider::after{ background:linear-gradient(90deg, var(--gold), transparent); }
+  .star-divider .star{ width:14px; height:14px; }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--teal-deep);
+    color:var(--sand);
+    border-bottom:3px solid var(--gold);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    max-width:1120px; margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-size:1.4rem; font-weight:700; color:var(--white);
+  }
+  .brand-logo{ width:38px; height:38px; border-radius:50%; object-fit:cover; }
+  nav ul{
+    list-style:none;
+    display:flex; gap:28px;
+  }
+  nav ul a{
+    font-weight:600; font-size:0.95rem;
+    letter-spacing:.02em;
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  nav ul a:hover, nav ul a:focus-visible{
+    border-color:var(--gold);
+    color:var(--gold-light);
+  }
+  .nav-toggle{ display:none; background:none; border:0; color:var(--white); font-size:1.6rem; cursor:pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(201,162,39,0.18), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(201,162,39,0.12), transparent 45%),
+      linear-gradient(160deg, var(--teal-deep) 0%, var(--teal-ink) 100%);
+    color:var(--sand);
+    padding:110px 24px 130px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:60px;
+    background:var(--sand);
+    clip-path:polygon(0 100%, 4% 40%, 8% 100%, 12% 40%, 16% 100%, 20% 40%, 24% 100%, 28% 40%, 32% 100%, 36% 40%, 40% 100%, 44% 40%, 48% 100%, 52% 40%, 56% 100%, 60% 40%, 64% 100%, 68% 40%, 72% 100%, 76% 40%, 80% 100%, 84% 40%, 88% 100%, 92% 40%, 96% 100%, 100% 40%, 100% 100%);
+  }
+  .hero-logo{ width:96px; height:96px; margin:0 auto 18px; border-radius:50%; box-shadow:0 0 0 3px var(--gold); }
+  .hero h1{
+    font-size:clamp(2.2rem, 5vw, 3.6rem);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .hero p.tagline{
+    font-size:1.15rem;
+    color:var(--gold-light);
+    font-style:italic;
+    margin-bottom:8px;
+  }
+  .hero p.sub{
+    max-width:560px; margin:18px auto 34px;
+    color:#DCE7E3;
+    font-size:1.02rem;
+  }
+  .btn-row{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn{
+    display:inline-block;
+    padding:13px 28px;
+    border-radius:var(--radius);
+    font-weight:700;
+    font-size:.95rem;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:transform .15s ease, background .2s ease, color .2s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--gold); color:var(--teal-ink); }
+  .btn-primary:hover{ background:var(--gold-light); }
+  .btn-ghost{ border-color:var(--gold); color:var(--sand); }
+  .btn-ghost:hover{ background:rgba(201,162,39,0.15); }
+
+  /* ---------- Sections ---------- */
+  section{ padding:80px 0; }
+  .eyebrow{
+    color:var(--olive);
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:.78rem;
+    display:block;
+    text-align:center;
+    margin-bottom:8px;
+  }
+  h2.section-title{
+    text-align:center;
+    font-size:clamp(1.7rem, 3.5vw, 2.4rem);
+    color:var(--teal-deep);
+    margin-bottom:18px;
+  }
+  .lead{
+    max-width:680px; margin:0 auto 44px;
+    text-align:center;
+    color:#4a4a3f;
+    font-size:1.05rem;
+  }
+
+  /* About */
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center;
+  }
+  .about-grid .plate{
+    background:var(--teal-deep);
+    color:var(--sand);
+    border-radius:var(--radius);
+    padding:36px;
+    position:relative;
+    border:1px solid var(--gold);
+  }
+  .about-grid .plate .star{ color:var(--gold); width:20px; height:20px; margin-bottom:12px; }
+  .about-grid .plate p{ font-size:1.02rem; color:#DCE7E3; }
+  .stat-row{ display:flex; gap:32px; margin-top:28px; flex-wrap:wrap; }
+  .stat{ }
+  .stat .num{ font-family:'Amiri', serif; font-size:2rem; color:var(--gold); font-weight:700; }
+  .stat .label{ font-size:.85rem; color:#5a5a4e; letter-spacing:.03em; }
+
+  /* Academics */
+  .card-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;
+  }
+  .card{
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:32px 26px;
+    border-top:4px solid var(--gold);
+    box-shadow:0 4px 14px rgba(11,79,69,0.06);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(11,79,69,0.12); }
+  .card .star{ width:18px; height:18px; color:var(--olive); margin-bottom:14px; }
+  .card h3{ font-size:1.2rem; color:var(--teal-deep); margin-bottom:10px; }
+  .card p{ font-size:.95rem; color:#4a4a3f; }
+
+  /* Admissions */
+  .admissions{
+    background:var(--teal-deep);
+    color:var(--sand);
+  }
+  .admissions .section-title{ color:var(--white); }
+  .admissions .lead{ color:#DCE7E3; }
+  .steps{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:22px;
+    counter-reset:step;
+  }
+  .step{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(201,162,39,0.35);
+    border-radius:var(--radius);
+    padding:24px 20px;
+    text-align:center;
+  }
+  .step .step-num{
+    font-family:'Amiri', serif;
+    font-size:1.6rem;
+    color:var(--gold);
+    margin-bottom:8px;
+  }
+  .step h4{ font-size:1rem; margin-bottom:6px; color:var(--white); }
+  .step p{ font-size:.85rem; color:#c9d5d0; }
+
+.card-photo{
+    width: 300px; height:300px;
+    border-radius:0;
+    object-fit:cover;
+    margin-bottom:14px;
+    border:3px solid var(--gold);
+    box-shadow:0 4px 10px rgba(11,79,69,0.15);
+}
+
+  /* News */
+  .news-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+  }
+  .news-card{
+    background:var(--white);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(11,79,69,0.06);
+  }
+  .news-thumb{
+    height:150px;
+    background:
+      repeating-linear-gradient(45deg, var(--olive) 0 2px, transparent 2px 18px),
+      linear-gradient(135deg, var(--teal-deep), var(--olive));
+  }
+  .news-body{ padding:22px; }
+  .news-date{ font-size:.78rem; color:var(--gold); font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+  .news-body h3{ font-size:1.05rem; margin:8px 0 8px; color:var(--teal-deep); }
+  .news-body p{ font-size:.9rem; color:#4a4a3f; }
+
+  /* Gallery */
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  }
+  .gallery-item{
+    aspect-ratio:1;
+    border-radius:var(--radius);
+    background:linear-gradient(135deg, var(--teal-deep), var(--olive));
+    position:relative;
+    overflow:hidden;
+  }
+
+  .contact-wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:48px;
+  }
+  .contact-info h3{ color:var(--teal-deep); margin-bottom:14px; }
+  .contact-info p{ margin-bottom:10px; color:#4a4a3f; }
+  .contact-info .star{ width:14px; height:14px; color:var(--gold); margin-right:8px; }
+  form{
+    background:var(--white);
+    padding:32px;
+    border-radius:var(--radius);
+    border-top:4px solid var(--gold);
+    box-shadow:0 4px 14px rgba(11,79,69,0.06);
+  }
+  .field{ margin-bottom:18px; }
+  label{ display:block; font-size:.85rem; font-weight:700; margin-bottom:6px; color:var(--teal-deep); }
+  input, textarea{
+    width:100%;
+    padding:11px 14px;
+    border:1px solid #d8d2bf;
+    border-radius:8px;
+    font-family:'Karla', sans-serif;
+    font-size:.95rem;
+    background:var(--sand);
+  }
+  input:focus, textarea:focus, a:focus-visible, button:focus-visible{
+    outline:3px solid var(--olive);
+    outline-offset:2px;
+  }
+  textarea{ min-height:110px; resize:vertical; }
+  .form-note{ font-size:.8rem; color:#8a8570; margin-top:10px; }
+  button[type="submit"]{
+    background:var(--teal-deep); color:var(--white);
+    border:none; width:100%;
+    padding:13px; border-radius:8px;
+    font-weight:700; cursor:pointer;
+    transition:background .2s ease;
+  }
+  button[type="submit"]:hover{ background:var(--teal-ink); }
+  #for,MNB mStatus{ margin-top:12px; font-size:.9rem; }
+
+  /* Footer */
+  footer{
+    background:var(--teal-ink);
+    color:#B9C9C3;
+    padding:48px 0 24px;
+    font-size:.9rem;
+  }
+  .footer-grid{
+    display:grid; grid-template-columns:2fr 1fr 1fr; gap:32px;
+    margin-bottom:32px;
+  }
+  footer h4{ color:var(--gold-light); font-family:'Amiri', serif; font-size:1.05rem; margin-bottom:14px; }
+  footer ul{ list-style:none; }
+  footer ul li{ margin-bottom:8px; }
+  footer ul a:hover{ color:var(--gold-light); }
+  .footer-bottom{
+    text-align:center; padding-top:24px; border-top:1px solid rgba(201,162,39,0.2);
+    font-size:.82rem; color:#8a9a94;
+  }
+
+  /* Responsive */
+  @media (max-width:860px){
+    nav ul{
+      position:fixed; top:64px; left:0; right:0;
+      background:var(--teal-deep);
+      flex-direction:column; gap:0;
+      max-height:0; overflow:hidden;
+      transition:max-height .3s ease;
+      border-bottom:2px solid var(--gold);
+    }
+    nav ul.open{ max-height:400px; }
+    nav ul li{ width:100%; }
+    nav ul a{ display:block; padding:16px 24px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .nav-toggle{ display:block; }
+    .about-grid, .contact-wrap{ grid-template-columns:1fr; }
+    .card-grid, .news-grid{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr 1fr; }
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+  }      
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="brand"><img src="FB_IMG_1787978504811.jpg" alt="KSP Logo" class="brand-logo">KALPITIYA SCIENCE PROJECT</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <ul id="navMenu">
+      <li><a href="#about">ONE OF THE BEST</a></li>
+      <li><a href="#academics">HIGH ACADEMIC STANDARDS</a></li>
+      <li><a href="#admissions">DESERVES MORE</a></li>
+      <li><a href="#news">TODAY LEARNING TOMORROW WINNING</a></li>
+      <li><a href="#gallery">CREATES THE GUIDERS</a></li>
+      <li><a href="#contact">WELCOME TO OUR FAMILY</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="container">
+     <img src="FB_IMG_1787978504811.jpg" alt="KSP Logo" class="hero-logo">
+    <h1>KALPITIYA SCIENE PROJECT</h1>
+    <p class="tagline">Knowledge is Light, Character is the Path</p>
+    <p class="sub">A nurturing place of learning where academic excellence grows alongside strong values, community, and faith.</p>
+    <div class="btn-row">
+      <a href="#admissions" class="btn btn-primary">Apply for Admission</a>
+      <a href="#about" class="btn btn-ghost">Learn More</a>
+    </div>
+  </div>
+</section>
+
+  <div class="container">
+    <span class="eyebrow"><h2>Welcome</h2></span>
+    <h2 class="section-title">About </h2>
+    <div class="about-grid">
+      <div>
+        <p style="color:#4a4a3f; font-size:1.05rem; margin-bottom:18px;">
+          KALPITIYA SCIENCE PROJECT is dedicated to shaping confident, capable, and principled young people. We combine a strong academic core with an environment rooted in respect, community, and moral grounding — preparing students not just for exams, but for life.
+        </p>
+        <p style="color:#4a4a3f; font-size:1.05rem;">
+          Every student is known, supported, and encouraged to discover their own path — guided by dedicated teachers and a curriculum that values both mind and character.
+        </p>
+        <div class="stat-row">
+          <div class="stat"><div class="num">05+</div><div class="label">YEARS OF BATCHES</div></div>
+          <div class="stat"><div class="num">100+</div><div class="label">STUDENTS</div></div>
+          <div class="stat"><div class="num">ISLAND WIDE </div><div class="label">DEDTICATED LECTURE PANNEL</div></div>
+        </div>
+      </div>
+      <div class="plate">
+        <span class="star" aria-hidden="true"></span>
+        <h3 style="color:var(--gold-light); margin-bottom:12px;">Our Mission</h3>
+        <p>To provide a balanced education that nurtures intellect, character, and  — equipping every student to lead with integrity and purpose.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="academics" style="background:var(--white);">
+  <div class="container">
+    <span class="eyebrow"><h2>Learning</h2></span>
+    <h2 class="section-title">OUR REPECTIVE LECTURE PANNEL</h2>
+    <p class="lead">A broad, rigorous curriculum delivered by experienced teachers, supporting every learner from early years through to the best results in advanced level examination.
+    <div class="card-grid">
+      <div class="card">
+  <img src="najeeb_portrait_cropped.png" alt="Mr. A.M. Najeeb" class="card-photo">
+  <h3>Mr.A.M.NAJEEB {B.SC / M.SC }</h3>
+  <p>OUR RESPECTIVE BIOLOGY LECTURER.</p>
+       </div>
+      <div class="card">
+  <img src="IMG-20260903-WA0017.jpg" alt="Mr. S. Anustan" class="card-photo">
+  <h3>Mr.S.ANUSTAN { B.SC (HON'S) } </h3>
+  <p>OUR RESPECTIVE COMBINED MATHEMATICS LECTURER.</p>
+</div>
+
+<div class="card">
+  <img src="IMG-20260903-WA0020.jpg" alt="Mr. A. Nafeel" class="card-photo">
+  <h3>Mr.A.NAFEEL { B.sc / M.sc }</h3>
+  <p>OUR RESPECTIVE COMBINED MATHEMATICS LECTURER.</p>
+</div>
+
+<div class="card">
+  <img src="akram_portrait_cropped.png" alt="Mr. M.F.M. Akram" class="card-photo">
+  <h3>Mr.M.F.M.AKRAM { B.sc / M.sc }</h3>
+  <p>OUR RESPECTIVE COMBINED MATHEMATICS LECTURER.</p>
+</div>
+
+<div class="card">
+  <img src="FB_IMG_1788109158841.jpg" alt="Mr. S. Ganesan" class="card-photo">
+  <h3>Mr.S.GANESAN { B.sc (ENG) }</h3>
+  <p>OUR RESPECTIVE PHYSICS LECTURER.</p>
+</div>
+
+<div class="card">
+  <img src="FB_IMG_1788109431421.jpg" alt="Mr. A.N. Afrah" class="card-photo">
+  <h3>Mr.A.N.AFRAH { B.sc (HON'S) }</h3>
+  <p>OUR RESPECTIVE PHYSICS LECTURER.</p>
+</div>
+
+<div class="card">
+  <img src="ChatGPT Image Sep 3, 2026, 03_31_43 PM.png" alt="Mr. M.N.M. Sifras" class="card-photo">
+  <h3>Mr.M.N.M.SIFRAS { MBBS }</h3>
+  <p>OUR RESPECTIVE PHYSICS LECTURER.</p>
+</div>
+
+<div class="card">
+  <img src="Screenshot_20260903-155318.png" alt="Mr. S.M. Waseem" class="card-photo">
+  <h3>Mr.S.M.WASEEM { B.sc (HON'S) }</h3>
+  <p>OUR RESPECTIVE CHEMISTRY LECTURER.</p>
+</div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="admissions" id="admissions">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--gold-light);"><h2>Join Us</h2></span>
+    <h2 class="section-title">Admissions</h2>
+    <p class="lead">Applying to KALPITIYA SCIENCE PROJECT is simple. Here's how the process works.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Enquire</h4>
+        <p>Reach out to our admissions office to learn about openings.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Submit Form</h4>
+        <p>Complete the application form and required documents.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Assessment</h4>
+        <p>Attend an entry assessment and short interview.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Enrollment</h4>
+        <p>Receive your offer and complete enrollment formalities.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:36px;">
+      <a href="#contact" class="btn btn-primary">Start Your Application</a>
+    </div>
+  </div>
+</section>
+<section id="gallery">
+  <div class="container">
+    <span class="eyebrow">Moments</span>
+    <h2 class="section-title">Gallery</h2>
+    <p class="lead">A glimpse into life at KALPITIYA SCIENCE PROJECT.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="IMG_3901.JPG" alt="KSP memory 1" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="IMG-20240827-WA0022.jpg" alt="KSP memory 2" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="IMG-20241231-WA0018.jpg" alt="KSP memory 3" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="IMG-20240827-WA0033.jpg" alt="KSP memory 4" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="IMG-20240827-WA0023 (1).jpg" alt="KSP memory 5" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="IMG-20240827-WA0066.jpg" alt="KSP memory 6" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="IMG-20241231-WA0020.jpg" alt="KSP memory 7" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="IMG_3903.JPG" alt="KSP memory 7" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--white);">
+  <div class="container">
+    <span class="eyebrow">Get in Touch</span>
+    <h2 class="section-title">REGISTRATION</h2>
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <h3>Visit or Reach Out</h3>
+        <p><span class="star" aria-hidden="true"></span>Address: [U.M.U.ROAD/KALPITIYA]</p>
+        <p><span class="star" aria-hidden="true"></span>Phone: [+94 704 656 660]</p>
+        <p><span class="star" aria-hidden="true"></span>Email: [SCHOOL EMAIL]</p>
+        <p><span class="star" aria-hidden="true"></span>Office Hours: Mon–Fri, 8:00 AM – 1:00 PM</p>
+      </div>
+
+
+      <form id="contactForm">
+        <div class="field">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+         <div class="field">
+          <label for="GENDER">Gender</label>
+          <select id="GENDER" name="GENDER" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        
+        </div>
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="contactNumber">Contact Number</label>
+          <input type="tel" id="contactNumber" name="contactNumber" required>
+        </div>
+        <div class="field">
+          <label for="stream">STREAM</label>
+          <select id="stream" name="stream" required>
+            <option value="">Select Stream</option>
+            <option value="Biological Science">Biological Science</option>
+            <option value="Physical Science">Physical Science</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+
+        </div>
+        <div>
+        <button type="submit"><a href="thankyou 02.html"   class="btn">SUBMIT</a></button>  <button type="reset"></button> <a href="ksp new.html" class="btn">RESET</a></button>
+        <p class="form-note">This form is frontend-only right now — connect it to a backend or a form service (e.g. Formspree, EmailJS) to receive submissions.</p>
+        <div id="formStatus"></div>
+      </form>
+    </div>
+  </div>
+  </a>
+  </p>
+
+
+
+
+  </p>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>KALPITIYA SCIENCE PROJECT</h4>
+        <p style="max-width:320px; color:#9db2ab;">Educating the next generation with knowledge, character, and community at heart.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#FACEBOOK PAGE">FB LINK</a></li>
+          <li><a href="#CONTECT DETAILS">CONTECT DETAILS</a></li>
+          <li><a href="#admissions">Admissions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>More</h4>
+        <ul>
+          <li><a href="#news">News</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 KALPITIYA SCIENCE PROJECT. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Contact form (frontend-only placeholder — wire up to your backend)
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    status.textContent = 'Thanks! (Connect this form to a backend to actually send messages.)';
+    status.style.color = '#0B4F45';
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
